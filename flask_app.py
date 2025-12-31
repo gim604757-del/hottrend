@@ -22,3 +22,4 @@ def get_naver_trends():
         keywords.append(r.text.strip())
 
     return keywords[:30]
+
