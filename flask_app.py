@@ -23,3 +23,24 @@ def get_naver_trends():
 
     return keywords[:30]
 
+########################################
+# GOOGLE 트렌드 (한국 기준, 최근 인기)
+########################################
+def get_google_trends():
+    url = "https://trends.google.com/trending?geo=KR"
+    headers = {"User-Agent": "Mozilla/5.0"}
+
+    res = requests.get(url, headers=headers, timeout=8)
+    res.encoding = "utf-8"
+    soup = BeautifulSoup(res.text, "html.parser")
+
+    keywords = []
+    titles = soup.find_all("span")
+
+    for t in titles:
+        txt = t.get_text(strip=True)
+        if len(txt) > 1:
+            keywords.append(txt)
+
+    # 중복 제거 + 30개 제한
+    return list(dict.fromkeys(keywords))[:30]
