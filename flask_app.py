@@ -44,3 +44,19 @@ def get_google_trends():
 
     # 중복 제거 + 30개 제한
     return list(dict.fromkeys(keywords))[:30]
+########################################
+# 공통 키워드 20개 추출
+########################################
+def get_hot_keywords():
+    google = set(get_google_trends())
+    naver = set(get_naver_trends())
+
+    # 공통 키워드
+    common = list(google & naver)
+
+    # 20개 이하일 경우 추가 보충
+    if len(common) < 20:
+        extra = list((google | naver) - set(common))
+        common.extend(extra)
+
+    return common[:20]
