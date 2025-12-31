@@ -60,3 +60,46 @@ def get_hot_keywords():
         common.extend(extra)
 
     return common[:20]
+########################################
+# HTML
+########################################
+HTML = """
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>한국 실시간 트렌드</title>
+
+<style>
+body { font-family: Arial; background:#111; color:white; text-align:center }
+.box { width:70%; margin:auto; padding:20px; }
+.keyword {
+  background:#222;
+  padding:15px;
+  margin:8px;
+  border-radius:10px;
+  font-size:20px;
+}
+a { color:#00ff90; text-decoration:none }
+</style>
+
+</head>
+<body>
+
+<h1>🇰🇷 한국 실시간 공통 인기 키워드</h1>
+<h3>Google + Naver 기준 (최근 트렌드)</h3>
+
+<div class="box">
+{% for k in keywords %}
+<div class="keyword">
+  {{ loop.index }}위 :
+  <a target="_blank" href="https://www.google.com/search?q={{k}}">
+    {{ k }}
+  </a>
+</div>
+{% endfor %}
+</div>
+
+</body>
+</html>
+"""
