@@ -103,3 +103,17 @@ a { color:#00ff90; text-decoration:none }
 </body>
 </html>
 """
+
+########################################
+# ROUTE
+########################################
+@app.route("/")
+def home():
+    kw = get_hot_keywords()
+    return render_template_string(HTML, keywords=kw)
+
+########################################
+# RUN
+########################################
+if __name__ == "__main__":
+    app.run()
